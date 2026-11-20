@@ -1,6 +1,6 @@
 # AutoFlame Sentinel — Système d’alarme incendie
 
-**AutoFlame Sentinel** est un projet de fin d’études consacré à la conception et à la simulation d’un système d’alarme incendie à base d’ESP32. Le dépôt présente le projet, son montage et sa simulation interactive Wokwi.
+**AutoFlame Sentinel** est un projet de fin d’études consacré à la conception d’un système connecté de détection et d’alerte incendie. Il associe une carte ESP32, des capteurs environnementaux, une évaluation du risque par intelligence artificielle et une supervision à distance.
 
 ## Simulation Wokwi
 
@@ -8,9 +8,42 @@
 
 ## Montage
 
-Le montage illustré associe une carte ESP32 à un capteur de flamme, un capteur DHT22, un écran LCD, un buzzer, des voyants LED, un relais et un potentiomètre.
+Le prototype s’appuie sur une carte ESP32-WROOM-32, un capteur de température et d’humidité DHT22, un capteur de flamme KY-026, des capteurs de fumée et de gaz MQ-2/MQ-6, ainsi qu’un écran LCD, des voyants, un buzzer et un actionneur d’extinction.
 
 ![Montage du système d’alarme incendie AutoFlame Sentinel](images/montage-alarme-incendie.png)
+
+## Fonctionnement du système
+
+1. **Mesure** — l’ESP32 recueille la température, l’humidité, la présence de flamme, la fumée et les gaz combustibles.
+2. **Évaluation et alerte** — les mesures de température, d’humidité et de gaz alimentent le modèle TensorFlow Lite, qui estime un niveau de risque (`low`, `medium` ou `high`). L’écran LCD et les indicateurs locaux signalent l’état du système; le buzzer avertit en cas d’alerte.
+3. **Transmission et supervision** — par Wi-Fi et API REST, les données et l’état du système sont transmis à Supabase. Les interfaces Flutter mobile et Web permettent de consulter les mesures, les graphiques et les alertes.
+4. **Action** — en cas d’incendie détecté, le système active l’alarme et commande le dispositif d’extinction par électrovanne. L’état de l’extincteur est également suivi dans la base.
+
+## Démonstration
+
+### Démarrage et connexion Wi-Fi
+
+L’écran LCD indique que le système est prêt après la connexion au réseau.
+
+![Démarrage du système et connexion Wi-Fi](images/connexion-wifi-demarrage-systeme.png)
+
+### Mesures et transmission des capteurs
+
+Les valeurs relevées par les capteurs sont envoyées à Supabase et consultables dans l’application.
+
+![Mesures des capteurs, envoi à Supabase et tableau de bord mobile](images/suivi-capteurs-et-envoi-supabase.png)
+
+### Détection de flamme et alerte
+
+Lors d’un essai de détection, les indicateurs d’alerte et le dispositif d’extinction sont activés, et une notification est affichée sur le téléphone.
+
+![Essai de détection de flamme, alerte et état de l’extincteur](images/detection-flamme-et-alerte.png)
+
+### Boîtier et application mobile
+
+Vue du boîtier assemblé et de l’interface de supervision mobile.
+
+![Boîtier final du système et application mobile](images/boitier-final-et-application-mobile.png)
 
 ## Tests des matériels
 
