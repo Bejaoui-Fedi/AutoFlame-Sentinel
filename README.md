@@ -66,6 +66,10 @@ Les sketches de test individuels des composants et les instructions de configura
 
 Les différentes versions des sketches Arduino/C++ sont regroupées dans le dossier [Les codes C++](Les%20codes%20C%2B%2B/README.md).
 
+## Application mobile
+
+Le code du dépôt [`smart_fire_alarm`](https://github.com/Bejaoui-Fedi/smart_fire_alarm), sa documentation et ses captures d’écran sont intégrés dans [Application mobile](Application%20mobile/README.md). L’application regroupe le tableau de bord, le suivi des capteurs, les alertes, l’analyse des risques et le pilotage des équipements.
+
 ## Modèle IA
 
 Le modèle TensorFlow Lite et ses métadonnées sont disponibles dans le dossier [Modèle IA](mod%C3%A9le%20IA/README.md).
