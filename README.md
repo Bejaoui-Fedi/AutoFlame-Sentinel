@@ -15,3 +15,7 @@ Le montage illustré associe une carte ESP32 à un capteur de flamme, un capteur
 ## Tests des matériels
 
 Les sketches de test individuels des composants et les instructions de configuration sont disponibles dans le dossier [Tests pour les matériels](Testes%20pour%20les%20mat%C3%A9riels/README.md).
+
+## Codes C++ du projet final
+
+Les différentes versions des sketches Arduino/C++ sont regroupées dans le dossier [Les codes C++](Les%20codes%20C%2B%2B/README.md).

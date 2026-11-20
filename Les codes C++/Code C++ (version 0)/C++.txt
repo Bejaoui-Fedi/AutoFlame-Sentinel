@@ -1,0 +1,124 @@
+ #include <DHT.h>
+#include <LiquidCrystal_I2C.h>
+
+// Initialisation LCD I2C
+LiquidCrystal_I2C lcd(0x27, 20, 4);
+
+// Définition des broches
+#define DHTPIN 4
+#define DHTTYPE DHT22
+#define MQ2_PIN 34         // Gaz - MQ-2 (analogique)
+#define MQ135_PIN 35       // Fumée - MQ-135 (analogique)
+#define FLAME_PIN 32       // Capteur de flamme (analogique)
+#define BUZZER_PIN 19
+#define GREEN_LED_PIN 2
+#define RED_LED_PIN 15
+
+// Seuils
+const float tempThreshold = 30.0;
+const float humidityThreshold = 20.0;
+const float gasThreshold = 200.0;  // 🔥 Seuil adapté après map()
+const int smokeAnalogThreshold = 600;
+const int flameAnalogThreshold = 400;
+
+// DHT init
+DHT dht(DHTPIN, DHTTYPE);
+
+// Timing
+unsigned long lastSensorRead = 0;
+const unsigned long sensorInterval = 1000;
+
+void setup() {
+  Serial.begin(115200);
+  lcd.init();
+  lcd.backlight();
+  lcd.setCursor(6, 0);
+  lcd.print("BIENVENUE");
+  lcd.setCursor(0, 1);
+  lcd.print("SYSTEME DE DETECTION");
+  lcd.setCursor(6, 2);
+  lcd.print("D'INCENDIE");
+  delay(3000);
+  lcd.clear();
+
+  // Broches
+  pinMode(MQ2_PIN, INPUT);
+  pinMode(MQ135_PIN, INPUT);
+  pinMode(FLAME_PIN, INPUT);
+  pinMode(BUZZER_PIN, OUTPUT);
+  pinMode(GREEN_LED_PIN, OUTPUT);
+  pinMode(RED_LED_PIN, OUTPUT);
+
+  dht.begin();
+}
+
+void loop() {
+  unsigned long currentMillis = millis();
+
+  if (currentMillis - lastSensorRead >= sensorInterval) {
+    lastSensorRead = currentMillis;
+
+    // Lecture des capteurs
+    float temp = dht.readTemperature();
+    float hum = dht.readHumidity();
+
+    int gasRaw = analogRead(MQ2_PIN); // MQ-2 brut (0–4095)
+    float gasValue = map(gasRaw, 0, 4095, 0, 300); // MQ-2 recalé (0–300)
+
+    bool gasDetected = gasValue > gasThreshold;
+    bool smokeDetected = analogRead(MQ135_PIN) > smokeAnalogThreshold;
+    bool flameDetected = analogRead(FLAME_PIN) < flameAnalogThreshold;
+
+    // 🔍 Debug console
+    Serial.print("MQ2 Brute: ");
+    Serial.print(gasRaw);
+    Serial.print("  Mappée: ");
+    Serial.println(gasValue);
+
+    // Vérification DHT
+    if (isnan(temp) || isnan(hum)) {
+      lcd.clear();
+      lcd.setCursor(0, 0);
+      lcd.print("Erreur capteur DHT");
+      return;
+    }
+
+    // Détection alarme
+    bool alert = false;
+
+    if (flameDetected || smokeDetected || gasDetected || temp > tempThreshold || hum < humidityThreshold) {
+      alert = true;
+    }
+
+    if (alert) {
+      digitalWrite(RED_LED_PIN, HIGH);
+      digitalWrite(GREEN_LED_PIN, LOW);
+      tone(BUZZER_PIN, 1000); // Buzzer actif
+    } else {
+      digitalWrite(RED_LED_PIN, LOW);
+      digitalWrite(GREEN_LED_PIN, HIGH);
+      noTone(BUZZER_PIN);
+    }
+
+    // 🖥️ Affichage LCD
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("T:");
+    lcd.print(temp, 1);
+    lcd.print("C H:");
+    lcd.print(hum, 0);
+    lcd.print("%");
+
+    lcd.setCursor(0, 1);
+    lcd.print("Gaz:");
+    lcd.print(gasValue, 0);
+
+    lcd.setCursor(0, 2);
+    lcd.print("Fumee:");
+    lcd.print(smokeDetected ? "OUI " : "NON");
+
+    lcd.setCursor(0, 3);
+    lcd.print("Flamme:");
+    lcd.print(flameDetected ? "OUI " : "NON");
+  }
+}
