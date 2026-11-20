@@ -22,7 +22,7 @@ Les différentes versions des sketches Arduino/C++ sont regroupées dans le doss
 
 ## Modèle IA
 
-Le modèle TensorFlow Lite et ses métadonnées sont disponibles dans le dossier [Modèle IA](mod%C3%A8le%20IA/README.md).
+Le modèle TensorFlow Lite et ses métadonnées sont disponibles dans le dossier [Modèle IA](mod%C3%A9le%20IA/README.md).
 
 ## Données Supabase
 
