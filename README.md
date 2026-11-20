@@ -19,31 +19,44 @@ Le prototype s’appuie sur une carte ESP32-WROOM-32, un capteur de température
 3. **Transmission et supervision** — par Wi-Fi et API REST, les données et l’état du système sont transmis à Supabase. Les interfaces Flutter mobile et Web permettent de consulter les mesures, les graphiques et les alertes.
 4. **Action** — en cas d’incendie détecté, le système active l’alarme et commande le dispositif d’extinction par électrovanne. L’état de l’extincteur est également suivi dans la base.
 
-## Démonstration
+## Galerie du projet
 
-### Démarrage et connexion Wi-Fi
+Cliquez sur une image pour l’ouvrir en taille originale.
 
-L’écran LCD indique que le système est prêt après la connexion au réseau.
-
-![Démarrage du système et connexion Wi-Fi](images/connexion-wifi-demarrage-systeme.png)
-
-### Mesures et transmission des capteurs
-
-Les valeurs relevées par les capteurs sont envoyées à Supabase et consultables dans l’application.
-
-![Mesures des capteurs, envoi à Supabase et tableau de bord mobile](images/suivi-capteurs-et-envoi-supabase.png)
-
-### Détection de flamme et alerte
-
-Lors d’un essai de détection, les indicateurs d’alerte et le dispositif d’extinction sont activés, et une notification est affichée sur le téléphone.
-
-![Essai de détection de flamme, alerte et état de l’extincteur](images/detection-flamme-et-alerte.png)
-
-### Boîtier et application mobile
-
-Vue du boîtier assemblé et de l’interface de supervision mobile.
-
-![Boîtier final du système et application mobile](images/boitier-final-et-application-mobile.png)
+<table>
+  <tr>
+    <td align="center" valign="top" width="50%">
+      <a href="images/connexion-wifi-demarrage-systeme.png">
+        <img src="images/connexion-wifi-demarrage-systeme.png" alt="Démarrage du système et connexion Wi-Fi" width="420">
+      </a><br>
+      <strong>Démarrage et connexion</strong><br>
+      <sub>L’écran LCD confirme la connexion Wi-Fi et l’état prêt du système.</sub>
+    </td>
+    <td align="center" valign="top" width="50%">
+      <a href="images/suivi-capteurs-et-envoi-supabase.png">
+        <img src="images/suivi-capteurs-et-envoi-supabase.png" alt="Mesures des capteurs, envoi à Supabase et tableau de bord mobile" width="420">
+      </a><br>
+      <strong>Mesures et supervision</strong><br>
+      <sub>Les relevés sont transmis à Supabase et consultables dans l’application.</sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" valign="top" width="50%">
+      <a href="images/detection-flamme-et-alerte.png">
+        <img src="images/detection-flamme-et-alerte.png" alt="Essai de détection de flamme, alerte et état de l’extincteur" width="420">
+      </a><br>
+      <strong>Détection et alerte</strong><br>
+      <sub>L’essai montre l’alerte locale, la notification mobile et l’état de l’extincteur.</sub>
+    </td>
+    <td align="center" valign="top" width="50%">
+      <a href="images/boitier-final-et-application-mobile.png">
+        <img src="images/boitier-final-et-application-mobile.png" alt="Boîtier final du système et application mobile" width="230">
+      </a><br>
+      <strong>Prototype final</strong><br>
+      <sub>Boîtier assemblé avec l’interface de supervision mobile.</sub>
+    </td>
+  </tr>
+</table>
 
 ## Tests des matériels
 
