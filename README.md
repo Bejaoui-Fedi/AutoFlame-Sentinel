@@ -19,3 +19,7 @@ Les sketches de test individuels des composants et les instructions de configura
 ## Codes C++ du projet final
 
 Les différentes versions des sketches Arduino/C++ sont regroupées dans le dossier [Les codes C++](Les%20codes%20C%2B%2B/README.md).
+
+## Modèle IA
+
+Le modèle TensorFlow Lite et ses métadonnées sont disponibles dans le dossier [Modèle IA](mod%C3%A8le%20IA/README.md).

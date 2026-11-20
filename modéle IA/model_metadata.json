@@ -1,0 +1,1 @@
+{"input_scaling": {"gas": {"min": 0, "max": 150}, "temperature": {"min": 15, "max": 45}, "humidity": {"min": 30, "max": 95}}, "output_labels": ["low", "medium", "high"], "version": "1.0"}
