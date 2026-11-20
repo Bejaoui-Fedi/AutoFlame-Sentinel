@@ -26,4 +26,6 @@ Le modèle TensorFlow Lite et ses métadonnées sont disponibles dans le dossier
 
 ## Données Supabase
 
-Une copie expurgée des fichiers de stockage est disponible dans [`kxtyvffgdgamkugzraaz.storage.sanitized.zip`](kxtyvffgdgamkugzraaz.storage.sanitized.zip). La photo personnelle de l’archive originale en a été retirée. La sauvegarde de base de données brute n’est pas publiée ; fournir une copie expurgée avant de l’ajouter au dépôt.
+Une copie expurgée des fichiers de stockage est disponible dans [`kxtyvffgdgamkugzraaz.storage.sanitized.zip`](kxtyvffgdgamkugzraaz.storage.sanitized.zip). La photo personnelle de l’archive originale en a été retirée.
+
+L’export SQL [schéma-seulement](db_cluster-29-07-2025-schema-only.sql.gz) contient les définitions de la base sans les enregistrements ni les valeurs de séquence. Les rôles et privilèges ont été retirés, les URL et jetons sensibles expurgés, et le déclencheur webhook propre au projet omis. Ce fichier n’est pas une sauvegarde complète restaurable : les rôles, privilèges et paramètres du webhook devront être recréés séparément. La sauvegarde brute n’est pas publiée.
